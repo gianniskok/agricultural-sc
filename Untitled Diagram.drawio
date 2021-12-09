@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-12-09T19:25:27.069Z" agent="5.0 (Windows)" etag="GXYCjMsODkYAcAMkEfjI" version="15.9.4" type="github">
+<mxfile host="app.diagrams.net" modified="2021-12-09T19:30:24.539Z" agent="5.0 (Windows)" etag="M21UOU3jkN30deu0fH6k" version="15.9.4" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="2062" dy="1104" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -173,14 +173,40 @@
         <mxCell id="Mbk-LU-rweTJqgh03F9p-32" value="HAS 20 TOKENS" style="rhombus;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="340" y="780" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="Mbk-LU-rweTJqgh03F9p-33" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="350" y="530" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="Mbk-LU-rweTJqgh03F9p-34" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="350" y="530" width="120" height="60" as="geometry" />
-        </mxCell>
         <mxCell id="Mbk-LU-rweTJqgh03F9p-35" value="STAKE (+5 PER MONTH)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="480" y="790" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Mbk-LU-rweTJqgh03F9p-37" value="USERS" style="swimlane;fontSize=10;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="50" y="720" width="200" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="Mbk-LU-rweTJqgh03F9p-38" value="FARMERS" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;" vertex="1" parent="Mbk-LU-rweTJqgh03F9p-37">
+          <mxGeometry x="70" y="30" width="60" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Mbk-LU-rweTJqgh03F9p-39" value="DISTRIBUTORS" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;" vertex="1" parent="Mbk-LU-rweTJqgh03F9p-37">
+          <mxGeometry x="55" y="50" width="90" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Mbk-LU-rweTJqgh03F9p-40" value="SAFETY CHECKERS" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;" vertex="1" parent="Mbk-LU-rweTJqgh03F9p-37">
+          <mxGeometry x="40" y="70" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Mbk-LU-rweTJqgh03F9p-41" value="MARKETS" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;" vertex="1" parent="Mbk-LU-rweTJqgh03F9p-37">
+          <mxGeometry x="65" y="90" width="70" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Mbk-LU-rweTJqgh03F9p-42" value="CUSTOMERS" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;" vertex="1" parent="Mbk-LU-rweTJqgh03F9p-37">
+          <mxGeometry x="60" y="110" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Mbk-LU-rweTJqgh03F9p-44" value="FARMERS" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fontSize=10;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="70" y="890" width="190" height="120" as="geometry">
+            <mxRectangle x="70" y="890" width="80" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Mbk-LU-rweTJqgh03F9p-45" value="SC PER ITEM FOR OWNERSHIP" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontSize=10;" vertex="1" parent="Mbk-LU-rweTJqgh03F9p-44">
+          <mxGeometry y="30" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Mbk-LU-rweTJqgh03F9p-46" value="ITEM TYPE" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontSize=10;" vertex="1" parent="Mbk-LU-rweTJqgh03F9p-44">
+          <mxGeometry y="60" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Mbk-LU-rweTJqgh03F9p-47" value="ITEM QUANTITY ,&#xa; ITEM EXPIRING DATE" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontSize=10;" vertex="1" parent="Mbk-LU-rweTJqgh03F9p-44">
+          <mxGeometry y="90" width="190" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
