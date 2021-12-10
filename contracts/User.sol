@@ -8,6 +8,41 @@ contract User is Owner {
     using Counters for Counters.Counter;
     Counters.Counter private _userId;
 
+    modifier onlyAdmin {
+        require(addressToUser[msg.sender].role == UserRole.Admin, "#OACA"); //Only admin can access this
+        _;
+    }
+
+    modifier onlyFarmer {
+        require(addressToUser[msg.sender].role == UserRole.Farmer, "#OFCA"); //Only farmer can access this
+        _;
+    }
+
+    modifier onlyStorage {
+        require(addressToUser[msg.sender].role == UserRole.Storage, "#OSCA"); //Only storage worker can access this
+        _;
+    }
+
+    modifier onlyTransporter {
+        require(addressToUser[msg.sender].role == UserRole.Transporter, "#OTCA"); //Only transporter can access this
+        _;
+    }
+
+    modifier onlyInpector {
+        require(addressToUser[msg.sender].role == UserRole.Inspector, "#OICA"); //Only inspector can access this
+        _;
+    }
+
+    modifier onlyPackager {
+        require(addressToUser[msg.sender].role == UserRole.Packager, "#OPCA"); //Only packager can access this
+        _;
+    }
+
+    modifier onlyRetailer {
+        require(addressToUser[msg.sender].role == UserRole.Retailer, "#ORCA"); //Only retailer can access this
+        _;
+    }
+
     enum UserRole {
         Farmer,
         Transporter,
@@ -29,11 +64,6 @@ contract User is Owner {
 
     UserDetails[] public UserStruct;
     mapping(address => UserDetails) public addressToUser;
-
-    modifier onlyAdmin {
-        require(addressToUser[msg.sender].role == UserRole.Admin, "#OACA"); //Only admin can access this
-        _;
-    }
 
     event adminRegistered(address indexed userAddress);
     event userRegistered(address indexed userAddress);
