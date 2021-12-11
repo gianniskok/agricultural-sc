@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-12-11T15:25:37.913Z" agent="5.0 (Windows)" etag="_h3b3v06lDfI8SUBX518" version="15.9.4" type="github">
+<mxfile host="app.diagrams.net" modified="2021-12-11T15:42:30.072Z" agent="5.0 (Windows)" etag="LynsJobV5AwyQt0DSjwm" version="15.9.4" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="1422" dy="744" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -146,10 +146,10 @@
           <mxGeometry x="30" y="30" width="120" height="130" as="geometry" />
         </mxCell>
         <mxCell id="QTkkzKiLqQ92HnuGSccN-2" value="PACKAGES" style="swimlane;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="214" y="710" width="206" height="150" as="geometry" />
+          <mxGeometry x="214" y="710" width="206" height="155" as="geometry" />
         </mxCell>
-        <mxCell id="QTkkzKiLqQ92HnuGSccN-3" value="&lt;div&gt;QUANTITY(GR)&lt;/div&gt;&lt;div&gt;PRICE(PER PACKAGE)&lt;/div&gt;&lt;div&gt;EXP_DATE&lt;/div&gt;&lt;div&gt;PACKAGER&lt;/div&gt;&lt;div&gt;TYPE&lt;/div&gt;&lt;div&gt;LOCATION&lt;/div&gt;&lt;div&gt;INCPECTOR&lt;/div&gt;&lt;div&gt;TRANSPORTTTER&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="QTkkzKiLqQ92HnuGSccN-2">
-          <mxGeometry x="33" y="30" width="140" height="120" as="geometry" />
+        <mxCell id="QTkkzKiLqQ92HnuGSccN-3" value="&lt;div&gt;QUANTITY(GR)&lt;/div&gt;&lt;div&gt;PRICE(PER PACKAGE)&lt;/div&gt;&lt;div&gt;EXP_DATE&lt;/div&gt;&lt;div&gt;PACKAGER&lt;/div&gt;&lt;div&gt;TYPE&lt;/div&gt;&lt;div&gt;LOCATION&lt;/div&gt;&lt;div&gt;INCPECTOR&lt;/div&gt;&lt;div&gt;TRANSPORTTTER&lt;/div&gt;&lt;div&gt;GOODSID&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="QTkkzKiLqQ92HnuGSccN-2">
+          <mxGeometry x="33" y="25" width="140" height="130" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
