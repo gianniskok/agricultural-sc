@@ -6,12 +6,11 @@ contract RawGoods {
     uint256 public pricePerKg;
     uint256 public expirentionalDate;
     address immutable owner;
-    address immutable goodsId;
     address transporter;
     address inspector;
     address packager;
-    string goodsType;
-    string location;
+    string public goodsType;
+    string public location;
     Stage goodsStage;
 
     enum Stage {
@@ -35,10 +34,11 @@ contract RawGoods {
         pricePerKg = _price;
         expirentionalDate = _expDate;
         owner = _farmer;
-        goodsId = address(this);
         goodsType = _type;
         goodsStage = Stage(0);
         location = _location;
+        inspector = address(0);
+        transporter = address(0);
     }
 
     modifier notExpired {
@@ -51,29 +51,38 @@ contract RawGoods {
         return updateGoodsStatus(1);
     }
 
-    function rejectGoodsAtInspection() external returns (bool) {
+    function rejectGoodsAtInspection(address _inspector) external returns (bool) {
         require(goodsStage == Stage(1), "Wrong Stage");
+        inspector = _inspector;
         return updateGoodsStatus(2);
     }
 
-    function approveGoodsAtInspection() external notExpired returns (bool) {
+    function approveGoodsAtInspection(address _inspector) external notExpired returns (bool) {
         require(goodsStage == Stage(1), "Wrong Stage");
+        inspector = _inspector;
         return updateGoodsStatus(3);
     }
 
-    function sendGoodsForShipmment() external notExpired returns (bool) {
+    function sendGoodsForShipmment(address _transporter) external notExpired returns (bool) {
         require(goodsStage == Stage(3), "Wrong Stage");
+        transporter = _transporter;
         return updateGoodsStatus(4);
     }
 
-    function deliverGoodsToPackager() external notExpired returns (bool) {
+    function deliverGoodsToPackager(address _packager) external notExpired returns (bool) {
         require(goodsStage == Stage(4), "Wrong Stage");
+        packager = _packager;
         return updateGoodsStatus(5);
     }
 
     function updateGoodsStatus(uint8 nextStage) private returns (bool) {
         goodsStage = Stage(nextStage);
         return true;
+    }
+
+    function returnFarmerInspectorTransporterPackager() external view returns (address, address, address, address){
+        require(goodsStage == Stage(5), "Not finished delivery");
+        return(owner, inspector, transporter, packager);
     }
 
 
