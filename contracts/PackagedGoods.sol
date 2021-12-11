@@ -46,5 +46,10 @@ contract PackagedGoods {
         packagesType = RawGoods(rawGoodsAddress).goodsType();
         packagesStages = Stage(0);
     }
-    
+
+    modifier notExpired {
+        require(block.timestamp < expDate, "Good Expired");
+        _;
+    }
+
 }
