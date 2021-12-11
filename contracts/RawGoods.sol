@@ -56,17 +56,17 @@ contract RawGoods {
         return updateGoodsStatus(2);
     }
 
-    function approveGoodsAtInspection() external returns (bool) {
+    function approveGoodsAtInspection() external notExpired returns (bool) {
         require(goodsStage == Stage(1), "Wrong Stage");
         return updateGoodsStatus(3);
     }
 
-    function sendGoodsForShipmment() external returns (bool) {
+    function sendGoodsForShipmment() external notExpired returns (bool) {
         require(goodsStage == Stage(3), "Wrong Stage");
         return updateGoodsStatus(4);
     }
 
-    function deliverGoodsToPackager() external returns (bool) {
+    function deliverGoodsToPackager() external notExpired returns (bool) {
         require(goodsStage == Stage(4), "Wrong Stage");
         return updateGoodsStatus(5);
     }
