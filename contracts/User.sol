@@ -4,6 +4,7 @@ pragma solidity ^0.8.0;
 import "hardhat/console.sol";
 import "./Owner.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+
 contract User is Owner {
     using Counters for Counters.Counter;
     Counters.Counter private _userId;
@@ -14,7 +15,7 @@ contract User is Owner {
     }
 
     modifier onlyFarmer {
-        require(addressToUser[msg.sender].role == UserRole.Farmer, "#OFCA"); //Only farmer can access this
+        require(addressToUser[msg.sender].role == UserRole.Farm, "#OFCA"); //Only farmer can access this
         _;
     }
 
@@ -24,7 +25,7 @@ contract User is Owner {
     }
 
     modifier onlyTransporter {
-        require(addressToUser[msg.sender].role == UserRole.Transporter, "#OTCA"); //Only transporter can access this
+        require(addressToUser[msg.sender].role == UserRole.Transport, "#OTCA"); //Only transporter can access this
         _;
     }
 
@@ -34,44 +35,46 @@ contract User is Owner {
     }
 
     modifier onlyPackager {
-        require(addressToUser[msg.sender].role == UserRole.Packager, "#OPCA"); //Only packager can access this
+        require(addressToUser[msg.sender].role == UserRole.Package, "#OPCA"); //Only packager can access this
         _;
     }
 
     modifier onlyRetailer {
-        require(addressToUser[msg.sender].role == UserRole.Retailer, "#ORCA"); //Only retailer can access this
+        require(addressToUser[msg.sender].role == UserRole.Retail, "#ORCA"); //Only retailer can access this
         _;
     }
 
     enum UserRole {
-        Farmer,
-        Transporter,
+        Farm,
+        Transport,
         Storage,
         Inspector,
-        Packager,
-        Retailer,
+        Package,
+        Retail,
         Admin
     }
 
-    struct UserDetails {
-        string userName;
+    struct UserInfo {
         address userAddress;
-        uint256 userId;
-        bool isActive;
+        string userName;
         UserRole role;
-        uint256 registrationDate;        
+        bool isActive;
+        uint256 registrationDate;
+        uint256 userId;
     }
 
-    UserDetails[] public UserStruct;
-    mapping(address => UserDetails) public addressToUser;
+    UserInfo[] public userInfo;
 
-    event adminRegistered(address indexed userAddress);
-    event userRegistered(address indexed userAddress);
+    mapping(address => UserInfo) public addressToUser;
+
+    event adminRegistered(address indexed userAddress, string userName, uint256 userId);
+    event userRegistered(address indexed userAddress, string userName, uint256 userId, UserRole role);
     event userDeactivated(address indexed userAddress);
+    event userReactivated(address indexed userAddress);
 
     function registerAdmin(string memory _userName, address _userAddress) external onlyOwner {
         require(addressToUser[_userAddress].userAddress != _userAddress, "UAE"); //User already exists
-        UserDetails memory newUser;
+        UserInfo memory newUser;
         _userId.increment();
         newUser.userName = _userName;
         newUser.userAddress = _userAddress;
@@ -80,13 +83,13 @@ contract User is Owner {
         newUser.role = UserRole.Admin;
         newUser.registrationDate = block.timestamp;
         addressToUser[_userAddress] = newUser;
-        UserStruct.push(newUser);
-        emit adminRegistered(_userAddress);
+        userInfo.push(newUser);
+        emit adminRegistered(_userAddress, _userName, _userId.current());
     }
 
     function registerUser(string memory _userName, address _userAddress, uint256 _userRole) external onlyAdmin {
         require(addressToUser[_userAddress].userAddress != _userAddress, "UAE"); //User already exists
-        UserDetails memory newUser;
+        UserInfo memory newUser;
         _userId.increment();
         newUser.userName = _userName;
         newUser.userAddress = _userAddress;
@@ -95,16 +98,24 @@ contract User is Owner {
         newUser.role = UserRole(_userRole);
         newUser.registrationDate = block.timestamp;
         addressToUser[_userAddress] = newUser;
-        UserStruct.push(newUser);
-        emit userRegistered(_userAddress);
+        userInfo.push(newUser);
+        emit userRegistered(_userAddress, _userName, _userId.current(), UserRole(_userRole));
     }
 
     function deActivateUser(address _userAddress) external onlyAdmin {
         require(addressToUser[_userAddress].userAddress == _userAddress, "UDE"); //User doesnt exist
         require(addressToUser[_userAddress].isActive == true, "UAD"); //User Already Deactivated
         addressToUser[_userAddress].isActive = false;
-        UserStruct[addressToUser[_userAddress].userId -1].isActive = false;
+        userInfo[addressToUser[_userAddress].userId -1].isActive = false;
         emit userDeactivated(_userAddress);
+    }
+
+    function reActivateUser(address _userAddress) external onlyAdmin {
+        require(addressToUser[_userAddress].userAddress == _userAddress, "UDE"); //User doesnt exist
+        require(addressToUser[_userAddress].isActive == false, "UND"); //User Not Deactivated
+        addressToUser[_userAddress].isActive = true;
+        userInfo[addressToUser[_userAddress].userId -1].isActive = true;
+        emit userReactivated(_userAddress);
     }
    
 }
