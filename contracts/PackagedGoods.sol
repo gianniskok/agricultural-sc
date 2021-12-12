@@ -56,7 +56,7 @@ contract PackagedGoods {
 
     function sendPackagesForInspection() external notExpired returns (bool) {
         require(packagesStages == Stage(0), "Wrong Stage");
-        updatePackagesStatus(1);
+        return updatePackagesStatus(1);
     }
     
     function rejectPackagesAtInspection(address _inspector) external returns (bool) {
