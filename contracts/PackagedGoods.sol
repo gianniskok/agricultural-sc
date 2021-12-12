@@ -92,7 +92,4 @@ contract PackagedGoods {
         require(packagesStages == Stage(5), "Not finished delivery");
         return(packager, inspector, transporter, storageAddress);
     }
-
-
-
 }
