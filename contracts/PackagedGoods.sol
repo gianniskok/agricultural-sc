@@ -9,7 +9,7 @@ contract PackagedGoods {
     address public transporter;
     address public inspector;
     address public packager;
-    uint256 packagesNo;
+    uint256 public packagesNo;
     uint256 grPerPackages;
     uint256 creationDate;
     uint256 expDate;
@@ -17,8 +17,19 @@ contract PackagedGoods {
     string location;
     string packagesType;
     Stage packagesStages;
-    address[] retailers;
-    mapping(address => bool) public retailerToIsValid;
+
+    mapping(uint256 => uint256) public firstToLastIndex;
+    mapping(uint256 => bool) public indexToValid;
+    struct Packages {
+        uint256 id;
+        address retailer;
+        address transporter;
+        AfterStage stage;
+        bool sold;
+    }
+
+    Packages[] public package;
+    mapping(uint256 => address) public indexToTransporter;
 
     enum Stage {
         packagesCreated,
@@ -28,6 +39,12 @@ contract PackagedGoods {
         pickedForStorage,
         arrivedAtStorage
     } 
+
+    enum AfterStage {
+        waitingForTransporter,
+        pickedForRetailer,
+        arrivedAtretailer
+    }
 
     constructor (
         address _rawGoodsAddress,
@@ -48,6 +65,9 @@ contract PackagedGoods {
         location = RawGoods(rawGoodsAddress).location();
         packagesType = RawGoods(rawGoodsAddress).goodsType();
         packagesStages = Stage(0);
+        for(uint i= 0; i<packagesNo; i++){
+            package.push(Packages(i, address(0), address(0), AfterStage(0), false));
+        }
     }
 
     modifier notExpired {
@@ -66,7 +86,7 @@ contract PackagedGoods {
         return updatePackagesStatus(2);
     }
 
-    function approveGoodsAtInspection(address _inspector) external notExpired returns (bool) {
+    function approvePackagesAtInspection(address _inspector) external notExpired returns (bool) {
         require(packagesStages == Stage(1), "Wrong Stage");
         inspector = _inspector;
         return updatePackagesStatus(3);
@@ -86,6 +106,43 @@ contract PackagedGoods {
 
     function updatePackagesStatus(uint8 nextStage) private returns (bool) {
         packagesStages = Stage(nextStage);
+        return true;
+    }
+
+    function setPackagesRetailer(uint256 _quantity, address _retailer, uint256 _index) external returns (bool) {
+        require(packagesStages == Stage(5), "Not at Storage");
+        for(uint i =_index; i<_index + _quantity; i++){
+            require(package[i].stage == AfterStage(0), "Error");
+            require(package[i].retailer == address(0), "Error2");
+            package[i].retailer = _retailer;
+        }
+        firstToLastIndex[_index] = _quantity + _index;
+        indexToValid[_index] = true;
+        return true;
+    }
+
+    function sendToRetailer(address _transporter, uint256 _index) external returns (bool){
+        require(indexToValid[_index], "Not valid");
+        require(packagesStages == Stage(5), "Not at Storage");
+        for(uint i =_index; i<firstToLastIndex[_index]; i++){
+            require(package[i].stage == AfterStage(0), "Error");
+            require(package[i].retailer != address(0), "Error2");
+            package[i].transporter = _transporter;
+            package[i].stage = AfterStage(1);
+        }
+        indexToTransporter[_index] = _transporter;
+        return true;
+    }
+
+    function deliverToRetailer(uint256 _index) external returns (bool){
+        require(indexToValid[_index], "Not valid");
+        require(packagesStages == Stage(5), "Not at Storage");
+        for(uint i =_index; i<firstToLastIndex[_index]; i++){
+            require(package[i].stage == AfterStage(1), "Error");
+            require(package[i].retailer != address(0), "Error2");
+            require(package[i].transporter != address(0), "Error2");
+            package[i].stage = AfterStage(2);
+        }
         return true;
     }
 

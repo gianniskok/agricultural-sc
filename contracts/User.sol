@@ -39,7 +39,7 @@ contract User {
         _;
     }
 
-    modifier onlyInpector {
+    modifier onlyInspector {
         require(addressToUser[msg.sender].role == UserRole.Inspector, "#OICA"); //Only inspector can access this
         _;
     }
