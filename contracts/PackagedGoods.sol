@@ -6,9 +6,9 @@ import "./RawGoods.sol";
 contract PackagedGoods {
     address rawGoodsAddress;
     address storageAddress;
-    address transporter;
-    address inspector;
-    address packager;
+    address public transporter;
+    address public inspector;
+    address public packager;
     uint256 packagesNo;
     uint256 grPerPackages;
     uint256 creationDate;
@@ -17,7 +17,7 @@ contract PackagedGoods {
     string location;
     string packagesType;
     Stage packagesStages;
-
+    address[] retailers;
 
     enum Stage {
         packagesCreated,

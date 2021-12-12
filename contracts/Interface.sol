@@ -2,7 +2,8 @@
 pragma solidity ^0.8.0;
 
 import "./Farm.sol";
+import "./Transport.sol";
 
-contract Interface is Farm {
+contract Interface is Farm, Transport {
     constructor(){}
 }

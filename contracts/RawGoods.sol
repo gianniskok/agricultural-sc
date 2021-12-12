@@ -6,9 +6,9 @@ contract RawGoods {
     uint256 public pricePerKg;
     uint256 public expirentionalDate;
     address immutable owner;
-    address transporter;
-    address inspector;
-    address packager;
+    address public transporter;
+    address public inspector;
+    address public packager;
     string public goodsType;
     string public location;
     Stage goodsStage;
