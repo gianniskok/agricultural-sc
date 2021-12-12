@@ -18,6 +18,7 @@ contract PackagedGoods {
     string packagesType;
     Stage packagesStages;
     address[] retailers;
+    mapping(address => bool) public retailerToIsValid;
 
     enum Stage {
         packagesCreated,
