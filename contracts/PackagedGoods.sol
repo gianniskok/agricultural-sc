@@ -49,7 +49,6 @@ contract PackagedGoods {
     constructor (
         address _rawGoodsAddress,
         uint256 _grPerPackage,
-        uint256 _quantity,
         address _packager
     ){
         require(grPerPackages > 0, "Not valid gr");
@@ -59,6 +58,7 @@ contract PackagedGoods {
         transporter = address(0);
         inspector = address(0);
         grPerPackages = _grPerPackage;
+        uint256 _quantity = RawGoods(rawGoodsAddress).quantityKg();
         packagesNo = (_quantity * 1000) / _grPerPackage;
         expDate = RawGoods(rawGoodsAddress).expirentionalDate();
         creationDate = block.timestamp;

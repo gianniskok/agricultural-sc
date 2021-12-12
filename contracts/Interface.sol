@@ -5,8 +5,9 @@ import "./Farm.sol";
 import "./Transport.sol";
 import "./Inspect.sol";
 import "./Storage.sol";
+import "./Packager.sol";
 
 
-contract Interface is Farm, Transport, Inspect, Storage {
-    constructor(){}
+contract Interface is Farm, Transport, Inspect, Storage, Packager {
+    constructor(){} 
 }
