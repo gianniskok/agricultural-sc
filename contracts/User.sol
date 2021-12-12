@@ -2,12 +2,22 @@
 pragma solidity ^0.8.0;
 
 import "hardhat/console.sol";
-import "./Owner.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract User is Owner {
+contract User {
     using Counters for Counters.Counter;
     Counters.Counter private _userId;
+
+    address  payable private immutable owner;
+
+    constructor() {
+        owner = payable(msg.sender);
+    }
+
+    modifier onlyOwner {
+        require(msg.sender == owner, "#OWCA"); // only owner can access
+        _;
+    }
 
     modifier onlyAdmin {
         require(addressToUser[msg.sender].role == UserRole.Admin, "#OACA"); //Only admin can access this
